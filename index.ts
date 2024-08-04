@@ -693,7 +693,7 @@ function renderHtmlAttributeString(k: string, v: HTMLAttributeValue) {
  * @returns A string representation of the JSX element using HTML syntax
  */
 export function renderHtmlElementString(element: JSXElement): string {
-    if (!element || element === true) return ''
+    if (element === null || element === undefined || typeof element === 'boolean') return ''
     if (typeof element === 'string') return element
     if (typeof element === 'number') return element.toString()
     if (Array.isArray(element)) {
@@ -716,7 +716,7 @@ export function renderHtmlElementString(element: JSXElement): string {
  * @returns A list of DOM nodes (elements or text) produced from the JSX element
  */
 export function renderHtmlDomNodes(element: JSXElement): (HTMLElement | Text)[] {
-    if (!element || element === true) return []
+    if (element === null || element === undefined || typeof element === 'boolean') return []
     if (typeof element === 'string') return [document.createTextNode(element)]
     if (typeof element === 'number') return [document.createTextNode(element.toString())]
     if (Array.isArray(element)) {
