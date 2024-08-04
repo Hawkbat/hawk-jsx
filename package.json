@@ -9,6 +9,9 @@
   },
   "author": "Hawkbar",
   "license": "MIT",
+  "repository": "github:Hawkbat/hawk-jsx",
+  "homepage": "https://github.com/Hawkbat/hawk-jsx/tree/main",
+  "bugs": "https://github.com/Hawkbat/hawk-jsx/issues",
   "devDependencies": {
     "typescript": "^5.5.4"
   },
