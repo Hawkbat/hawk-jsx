@@ -1,0 +1,19 @@
+{
+  "name": "hawk-jsx",
+  "version": "1.0.0",
+  "description": "A minimal JSX library for static HTML templating on both client and server.",
+  "type": "module",
+  "main": "index.js",
+  "scripts": {
+    "build": "tsc -b ."
+  },
+  "author": "Hawkbar",
+  "license": "MIT",
+  "devDependencies": {
+    "typescript": "^5.5.4"
+  },
+  "exports": {
+    "./jsx-runtime": "./jsx-runtime.js",
+    "./jsx-dev-runtime": "./jsx-dev-runtime.js"
+  }
+}

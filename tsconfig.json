@@ -1,0 +1,15 @@
+{
+    "include": ["**/*.ts", "**/*.tsx"],
+    "exclude": ["/node_modules/"],
+    "compilerOptions": {
+        "incremental": true,
+        "composite": true,
+        "strict": true,
+        "target": "ESNext",
+        "module": "NodeNext",
+        "sourceMap": true,
+        "declaration": true,
+        "jsx": "react-jsxdev",
+        "jsxImportSource": "hawk-jsx"
+    }
+}
