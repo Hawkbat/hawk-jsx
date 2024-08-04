@@ -571,16 +571,15 @@ type HTMLAttributeValue = string | number | boolean
 type HTMLElementPropsOf<T extends HTMLElementName> = Partial<HTMLElementAttributesOf<T>> & { children?: T extends VoidElementNames ? never : JSXChildren }
 
 /** The values allowed as children of JSX elements. */
-export type JSXChildren = JSXElement | JSXElement[]
+export type JSXChildren = JSXElement
 
 /** A function component that takes a props object and returns JSX elements. */
-export type JSXFunction<Props extends Record<string, unknown>> = (props: Props) => JSXElement | JSXElement[]
-
+export type JSXFunction<Props extends Record<string, unknown>> = (props: Props) => JSXElement
 /** Extracts the type of the props object of a function component. */
 export type JSXFunctionProps<T extends JSXFunction<any>> = T extends JSXFunction<infer P> ? P : never
 
 /** The values that can be produced via JSX. */
-export type JSXElement = JSXHTMLElement<HTMLElementName> | JSXFunctionElement<JSXFunction<any>> | number | boolean | string | null | undefined
+export type JSXElement = JSXHTMLElement<HTMLElementName> | JSXFunctionElement<JSXFunction<any>> | number | boolean | string | null | undefined | JSXElement[]
 
 type JSXElementType = HTMLElementName | JSXFunction<any>
 
@@ -639,6 +638,7 @@ export const Fragment = ((props: { children?: JSXChildren }) => props.children) 
 export function isFunctionElement<T extends JSXFunction<any>>(element: JSXElement, func?: T): element is JSXFunctionElement<T> {
     if (!element) return false
     if (typeof element !== 'object') return false
+    if (Array.isArray(element)) return false
     if (typeof element.type !== 'function') return false
     if (func !== undefined) return element.type === func
     return true
@@ -653,6 +653,7 @@ export function isFunctionElement<T extends JSXFunction<any>>(element: JSXElemen
 export function isHtmlElement<T extends HTMLElementName>(element: JSXElement, tag?: T): element is JSXHTMLElement<T> {
     if (!element) return false
     if (typeof element !== 'object') return false
+    if (Array.isArray(element)) return false
     if (typeof element.type !== 'string') return false
     if (tag !== undefined) return element.type === tag
     return true
@@ -695,15 +696,18 @@ export function renderHtmlElementString(element: JSXElement): string {
     if (!element || element === true) return ''
     if (typeof element === 'string') return element
     if (typeof element === 'number') return element.toString()
-    if (typeof element.type === 'string') {
+    if (Array.isArray(element)) {
+        return element.reduce<string>((p, c) => p + renderHtmlElementString(c), '')
+    } else if (typeof element.type === 'string') {
         const { children, ...attrs } = element.props
         const attrString = Object.entries(attrs).filter(([k, v]) => v !== undefined && v !== false).reduceRight((p, [k, v]) => p + ` ${renderHtmlAttributeString(k, v)}`, '')
         const childrenString = wrapSingular(children).reduce((p, c) => p + renderHtmlElementString(c), '')
         return `<${element.type}${attrString}${isSelfClosingElementTag(element.type) ? ' />' : `>${childrenString}</${element.type}>`}`
-    } else {
+    } else if (typeof element.type === 'function') {
         const result = element.type(element.props)
         return wrapSingular(result).reduce<string>((p, c) => p + renderHtmlElementString(c), '')
     }
+    throw new Error(`Unknown JSX element type: ${JSON.stringify(element)}`)
 }
 
 /**
@@ -715,7 +719,9 @@ export function renderHtmlDomNodes(element: JSXElement): (HTMLElement | Text)[] 
     if (!element || element === true) return []
     if (typeof element === 'string') return [document.createTextNode(element)]
     if (typeof element === 'number') return [document.createTextNode(element.toString())]
-    if (typeof element.type === 'string') {
+    if (Array.isArray(element)) {
+        return element.flatMap(c => renderHtmlDomNodes(c))
+    } else if (typeof element.type === 'string') {
         const el = document.createElement(element.type)
         const { children, ...attrs } = element.props
         for (const [k, v] of Object.entries(attrs)) {
@@ -727,8 +733,9 @@ export function renderHtmlDomNodes(element: JSXElement): (HTMLElement | Text)[] 
             el.append(...wrapSingular(children).flatMap(c => renderHtmlDomNodes(c)))
         }
         return [el]
-    } else {
+    } else if (typeof element.type === 'function') {
         const result = element.type(element.props)
         return wrapSingular(result).flatMap(c => renderHtmlDomNodes(c))
     }
+    throw new Error(`Unknown JSX element type: ${JSON.stringify(element)}`)
 }
