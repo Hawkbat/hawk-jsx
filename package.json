@@ -1,6 +1,6 @@
 {
   "name": "hawk-jsx",
-  "version": "1.0.4",
+  "version": "1.1.0",
   "description": "A minimal JSX library for static HTML templating on both client and server.",
   "type": "module",
   "main": "index.js",
