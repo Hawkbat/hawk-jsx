@@ -28,68 +28,69 @@ type HTMLElementStandardAttributes = {
     translate: HTMLAttributeValue,
     writingsuggestions: HTMLAttributeValue,
 
-    onabort: HTMLAttributeValue,
-    onautocomplete: HTMLAttributeValue,
-    onautocompleteerror: HTMLAttributeValue,
-    onblur: HTMLAttributeValue,
-    oncancel: HTMLAttributeValue,
-    oncanplay: HTMLAttributeValue,
-    oncanplaythrough: HTMLAttributeValue,
-    onchange: HTMLAttributeValue,
-    onclick: HTMLAttributeValue,
-    onclose: HTMLAttributeValue,
-    oncontextmenu: HTMLAttributeValue,
-    oncuechange: HTMLAttributeValue,
-    ondblclick: HTMLAttributeValue,
-    ondrag: HTMLAttributeValue,
-    ondragend: HTMLAttributeValue,
-    ondragenter: HTMLAttributeValue,
-    ondragleave: HTMLAttributeValue,
-    ondragover: HTMLAttributeValue,
-    ondragstart: HTMLAttributeValue,
-    ondrop: HTMLAttributeValue,
-    ondurationchange: HTMLAttributeValue,
-    onemptied: HTMLAttributeValue,
-    onended: HTMLAttributeValue,
-    onerror: HTMLAttributeValue,
-    onfocus: HTMLAttributeValue,
-    oninput: HTMLAttributeValue,
-    oninvalid: HTMLAttributeValue,
-    onkeydown: HTMLAttributeValue,
-    onkeypress: HTMLAttributeValue,
-    onkeyup: HTMLAttributeValue,
-    onload: HTMLAttributeValue,
-    onloadeddata: HTMLAttributeValue,
-    onloadedmetadata: HTMLAttributeValue,
-    onloadstart: HTMLAttributeValue,
-    onmousedown: HTMLAttributeValue,
-    onmouseenter: HTMLAttributeValue,
-    onmouseleave: HTMLAttributeValue,
-    onmousemove: HTMLAttributeValue,
-    onmouseout: HTMLAttributeValue,
-    onmouseover: HTMLAttributeValue,
-    onmouseup: HTMLAttributeValue,
-    onmousewheel: HTMLAttributeValue,
-    onpause: HTMLAttributeValue,
-    onplay: HTMLAttributeValue,
-    onplaying: HTMLAttributeValue,
-    onprogress: HTMLAttributeValue,
-    onratechange: HTMLAttributeValue,
-    onreset: HTMLAttributeValue,
-    onresize: HTMLAttributeValue,
-    onscroll: HTMLAttributeValue,
-    onseeked: HTMLAttributeValue,
-    onseeking: HTMLAttributeValue,
-    onselect: HTMLAttributeValue,
-    onshow: HTMLAttributeValue,
-    onsort: HTMLAttributeValue,
-    onstalled: HTMLAttributeValue,
-    onsubmit: HTMLAttributeValue,
-    onsuspend: HTMLAttributeValue,
-    ontimeupdate: HTMLAttributeValue,
-    ontoggle: HTMLAttributeValue,
-    onvolumechange: HTMLAttributeValue,
-    onwaiting: HTMLAttributeValue,
+    onabort: HTMLAttributeValue | ((e: Event) => void),
+    onautocomplete: HTMLAttributeValue | ((e: Event) => void),
+    onautocompleteerror: HTMLAttributeValue | ((e: Event) => void),
+    onblur: HTMLAttributeValue | ((e: FocusEvent) => void),
+    oncancel: HTMLAttributeValue | ((e: Event) => void),
+    oncanplay: HTMLAttributeValue | ((e: Event) => void),
+    oncanplaythrough: HTMLAttributeValue | ((e: Event) => void),
+    onchange: HTMLAttributeValue | ((e: Event) => void),
+    onclick: HTMLAttributeValue | ((e: PointerEvent) => void),
+    onclose: HTMLAttributeValue | ((e: Event) => void),
+    oncontextmenu: HTMLAttributeValue | ((e: PointerEvent) => void),
+    oncuechange: HTMLAttributeValue | ((e: Event) => void),
+    ondblclick: HTMLAttributeValue | ((e: PointerEvent) => void),
+    ondrag: HTMLAttributeValue | ((e: DragEvent) => void),
+    ondragend: HTMLAttributeValue | ((e: DragEvent) => void),
+    ondragenter: HTMLAttributeValue | ((e: DragEvent) => void),
+    ondragleave: HTMLAttributeValue | ((e: DragEvent) => void),
+    ondragover: HTMLAttributeValue | ((e: DragEvent) => void),
+    ondragstart: HTMLAttributeValue | ((e: DragEvent) => void),
+    ondrop: HTMLAttributeValue | ((e: DragEvent) => void),
+    ondurationchange: HTMLAttributeValue | ((e: Event) => void),
+    onemptied: HTMLAttributeValue | ((e: Event) => void),
+    onended: HTMLAttributeValue | ((e: Event) => void),
+    onerror: HTMLAttributeValue | ((e: ErrorEvent | Event) => void),
+    onfocus: HTMLAttributeValue | ((e: FocusEvent) => void),
+    oninput: HTMLAttributeValue | ((e: InputEvent) => void),
+    oninvalid: HTMLAttributeValue | ((e: Event) => void),
+    onkeydown: HTMLAttributeValue | ((e: KeyboardEvent) => void),
+    onkeypress: HTMLAttributeValue | ((e: KeyboardEvent) => void),
+    onkeyup: HTMLAttributeValue | ((e: KeyboardEvent) => void),
+    onload: HTMLAttributeValue | ((e: Event) => void),
+    onloadeddata: HTMLAttributeValue | ((e: Event) => void),
+    onloadedmetadata: HTMLAttributeValue | ((e: Event) => void),
+    onloadstart: HTMLAttributeValue | ((e: Event) => void),
+    onmousedown: HTMLAttributeValue | ((e: MouseEvent) => void),
+    onmouseenter: HTMLAttributeValue | ((e: MouseEvent) => void),
+    onmouseleave: HTMLAttributeValue | ((e: MouseEvent) => void),
+    onmousemove: HTMLAttributeValue | ((e: MouseEvent) => void),
+    onmouseout: HTMLAttributeValue | ((e: MouseEvent) => void),
+    onmouseover: HTMLAttributeValue | ((e: MouseEvent) => void),
+    onmouseup: HTMLAttributeValue | ((e: MouseEvent) => void),
+    onmousewheel: HTMLAttributeValue | ((e: WheelEvent) => void),
+    onpause: HTMLAttributeValue | ((e: Event) => void),
+    onplay: HTMLAttributeValue | ((e: Event) => void),
+    onplaying: HTMLAttributeValue | ((e: Event) => void),
+    onprogress: HTMLAttributeValue | ((e: Event) => void),
+    onratechange: HTMLAttributeValue | ((e: Event) => void),
+    onreset: HTMLAttributeValue | ((e: Event) => void),
+    onresize: HTMLAttributeValue | ((e: Event) => void),
+    onscroll: HTMLAttributeValue | ((e: Event) => void),
+    onseeked: HTMLAttributeValue | ((e: Event) => void),
+    onseeking: HTMLAttributeValue | ((e: Event) => void),
+    onselect: HTMLAttributeValue | ((e: Event) => void),
+    onshow: HTMLAttributeValue | ((e: Event) => void),
+    onsort: HTMLAttributeValue | ((e: Event) => void),
+    onstalled: HTMLAttributeValue | ((e: Event) => void),
+    onsubmit: HTMLAttributeValue | ((e: Event) => void),
+    onsuspend: HTMLAttributeValue | ((e: Event) => void),
+    ontimeupdate: HTMLAttributeValue | ((e: Event) => void),
+    ontoggle: HTMLAttributeValue | ((e: ToggleEvent) => void),
+    onvolumechange: HTMLAttributeValue | ((e: Event) => void),
+    onwaiting: HTMLAttributeValue | ((e: Event) => void),
+
     role: HTMLAttributeValue,
     
     'aria-activedescendant': HTMLAttributeValue,
@@ -681,10 +682,13 @@ function escapeHtmlAttributeValue(s: string) {
     return s.replaceAll('<', '&lt;').replaceAll('>', '&gt;').replaceAll('&', '&amp;').replaceAll('"', '&quot;')
 }
 
-function renderHtmlAttributeString(k: string, v: HTMLAttributeValue) {
+function renderHtmlAttributeString(k: string, v: HTMLAttributeValue | ((...args: any[]) => void)): string {
     if (v === undefined || v === false) return ''
-    if (v === true) return k
-    return `${k}="${escapeHtmlAttributeValue(v.toString())}"`
+    else if (v === true) return k
+    else if (typeof v === 'string') return `${k}="${escapeHtmlAttributeValue(v)}"`
+    else if (typeof v === 'number') return `${k}="${v.toString()}"`
+    else if (typeof v === 'function' && k.startsWith('on')) return ''
+    else throw new Error(`Unsupported attribute value type for attribute ${k}: ${JSON.stringify(v)}`)
 }
 
 /**
@@ -727,7 +731,14 @@ export function renderHtmlDomNodes(element: JSXElement): (HTMLElement | Text)[] 
         for (const [k, v] of Object.entries(attrs)) {
             if (v === undefined || v === false) continue
             if (v === true) el.setAttribute(k, '')
-            else el.setAttribute(k, v.toString())
+            else if (typeof v === 'string') el.setAttribute(k, v)
+            else if (typeof v === 'number') el.setAttribute(k, v.toString())
+            else if (typeof v === 'function' && k.startsWith('on')) {
+                const eventName = k.substring(2).toLowerCase()
+                el.addEventListener(eventName, v as EventListener)
+            } else {
+                throw new Error(`Unsupported attribute value type for attribute ${k} on <${element.type}>: ${JSON.stringify(v)}`)
+            }
         }
         if (!isSelfClosingElementTag(element.type)) {
             el.append(...wrapSingular(children).flatMap(c => renderHtmlDomNodes(c)))
